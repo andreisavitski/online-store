@@ -1,14 +1,14 @@
 package by.pvt.onlinestore.core.service.impl;
 
+import by.pvt.onlinestore.core.mapper.BasketMapper;
 import by.pvt.onlinestore.core.repository.BasketRepository;
-import org.modelmapper.ModelMapper;
 
 public class BasketServiceImpl {
     private final BasketRepository basketRepository;
-    private final ModelMapper modelMapper;
+    private final BasketMapper basketMapper;
 
-    public BasketServiceImpl(BasketRepository basketRepository, ModelMapper modelMapper) {
+    public BasketServiceImpl(BasketRepository basketRepository, BasketMapper basketMapper) {
         this.basketRepository = basketRepository;
-        this.modelMapper = modelMapper;
+        this.basketMapper = basketMapper;
     }
 }

@@ -12,4 +12,6 @@ public interface UserRepository {
     List<User> getAllUser();
 
     User getUserById(Long id);
+    User getByLogin(String login);
+    boolean findByLogin(String login);
 }

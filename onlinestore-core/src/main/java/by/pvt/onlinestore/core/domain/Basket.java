@@ -4,16 +4,16 @@ import java.util.Objects;
 
 public class Basket {
     private Long basketId;
-    private Product product;
-    private Order order;
+    private Long productId;
+    private Long orderId;
 
     public Basket() {
     }
 
-    public Basket(Long basketId, Product product, Order order) {
+    public Basket(Long basketId, Long productId, Long orderId) {
         this.basketId = basketId;
-        this.product = product;
-        this.order = order;
+        this.productId = productId;
+        this.orderId = orderId;
     }
 
     @Override
@@ -21,20 +21,20 @@ public class Basket {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Basket basket = (Basket) o;
-        return Objects.equals(basketId, basket.basketId) && Objects.equals(product, basket.product) && Objects.equals(order, basket.order);
+        return Objects.equals(basketId, basket.basketId) && Objects.equals(productId, basket.productId) && Objects.equals(orderId, basket.orderId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(basketId, product, order);
+        return Objects.hash(basketId, productId, orderId);
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("Basket{");
         sb.append("basketId=").append(basketId);
-        sb.append(", product=").append(product);
-        sb.append(", order=").append(order);
+        sb.append(", productId=").append(productId);
+        sb.append(", orderId=").append(orderId);
         sb.append('}');
         return sb.toString();
     }
@@ -47,19 +47,19 @@ public class Basket {
         this.basketId = basketId;
     }
 
-    public Product getProduct() {
-        return product;
+    public Long getProductId() {
+        return productId;
     }
 
-    public void setProduct(Product product) {
-        this.product = product;
+    public void setProductId(Long productId) {
+        this.productId = productId;
     }
 
-    public Order getOrder() {
-        return order;
+    public Long getOrderId() {
+        return orderId;
     }
 
-    public void setOrder(Order order) {
-        this.order = order;
+    public void setOrderId(Long orderId) {
+        this.orderId = orderId;
     }
 }

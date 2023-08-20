@@ -1,36 +1,25 @@
-package by.pvt.onlinestore.core.domain;
+package by.pvt.onlinestore.core.dto.product;
 
-import java.io.Serializable;
+import by.pvt.onlinestore.core.domain.ProductType;
+
+import java.math.BigDecimal;
 import java.util.Objects;
 
-public class Product implements Serializable {
-
+public class ProductRequestDTO {
     private Long productId;
-    private String productSku;
+    private String  productSku;
     private String name;
     private ProductType productType;
     private Long price;
     private String description;
     private int quantityInStock;
 
-    public Product() {
-    }
-
-    public Product(String productSku, String name, ProductType productType, Long price, String description, int quantityInStock) {
-        this.productSku = productSku;
-        this.name = name;
-        this.productType = productType;
-        this.price = price;
-        this.description = description;
-        this.quantityInStock = quantityInStock;
-    }
-
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
-        Product product = (Product) o;
-        return quantityInStock == product.quantityInStock && Objects.equals(productId, product.productId) && Objects.equals(productSku, product.productSku) && Objects.equals(name, product.name) && productType == product.productType && Objects.equals(price, product.price) && Objects.equals(description, product.description);
+        ProductRequestDTO that = (ProductRequestDTO) o;
+        return quantityInStock == that.quantityInStock && Objects.equals(productId, that.productId) && Objects.equals(productSku, that.productSku) && Objects.equals(name, that.name) && productType == that.productType && Objects.equals(price, that.price) && Objects.equals(description, that.description);
     }
 
     @Override
@@ -40,7 +29,7 @@ public class Product implements Serializable {
 
     @Override
     public String toString() {
-        final StringBuffer sb = new StringBuffer("Product{");
+        final StringBuffer sb = new StringBuffer("ProductRequestDTO{");
         sb.append("productId=").append(productId);
         sb.append(", productSku=").append(productSku);
         sb.append(", name='").append(name).append('\'');
@@ -50,22 +39,6 @@ public class Product implements Serializable {
         sb.append(", quantityInStock=").append(quantityInStock);
         sb.append('}');
         return sb.toString();
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public ProductType getProductType() {
-        return productType;
-    }
-
-    public void setProductType(ProductType productType) {
-        this.productType = productType;
     }
 
     public Long getProductId() {
@@ -84,12 +57,28 @@ public class Product implements Serializable {
         this.productSku = productSku;
     }
 
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public ProductType getProductType() {
+        return productType;
+    }
+
+    public void setProductType(ProductType productType) {
+        this.productType = productType;
+    }
+
     public Long getPrice() {
         return price;
     }
 
-    public void setPrice(Long price) {
-        this.price = price;
+    public void setPrice(String price) {
+        this.price = Long.parseLong(price);
     }
 
     public String getDescription() {

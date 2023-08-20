@@ -7,7 +7,11 @@ import java.util.List;
 public interface ProductRepository {
     void addProduct(Product product);
 
+    void addOldProduct(Product product);
+
     void deleteProductById(Long id);
+
+    void deleteProductWithoutSaving(Long id);
 
     List<Product> getAllProducts();
 
@@ -15,5 +19,8 @@ public interface ProductRepository {
 
     Product getProductByName(String name);
 
-    Product getProductBySku(Long productSku);
+    Product getProductBySku(String productSku);
+    Product getProductByIdForChange(Long id);
+
+    boolean findBySku(String sku);
 }

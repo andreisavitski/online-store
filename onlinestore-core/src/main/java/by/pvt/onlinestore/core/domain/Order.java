@@ -6,8 +6,8 @@ import java.util.Objects;
 
 public class Order {
     private Long id;
-    private Long userld;
-    private Basket basket;
+    private Long userId;
+    private Long basketId;
     private LocalDateTime orderDate;
     private BigDecimal orderCost;
     private int numberOfUnits;
@@ -15,10 +15,10 @@ public class Order {
     public Order() {
     }
 
-    public Order(Long id, Long userld, Basket basket, LocalDateTime orderDate, int numberOfUnits) {
+    public Order(Long id, Long userId, Long basketId, LocalDateTime orderDate, int numberOfUnits) {
         this.id = id;
-        this.userld = userld;
-        this.basket = basket;
+        this.userId = userId;
+        this.basketId = basketId;
         this.orderDate = orderDate;
 //        this.orderCost = basket.getPrice().multiply(new BigDecimal(numberOfUnits).setScale(0, RoundingMode.CEILING));
         this.numberOfUnits = numberOfUnits;
@@ -28,8 +28,8 @@ public class Order {
     public String toString() {
         final StringBuffer sb = new StringBuffer("Order{");
         sb.append("id=").append(id);
-        sb.append(", userld=").append(userld);
-        sb.append(", basket=").append(basket);
+        sb.append(", userId=").append(userId);
+        sb.append(", basketId=").append(basketId);
         sb.append(", orderDate=").append(orderDate);
         sb.append(", orderCost=").append(orderCost);
         sb.append(", numberOfUnits=").append(numberOfUnits);
@@ -39,7 +39,7 @@ public class Order {
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userld, basket, orderDate, orderCost, numberOfUnits);
+        return Objects.hash(id, userId, basketId, orderDate, orderCost, numberOfUnits);
     }
 
     @Override
@@ -47,7 +47,7 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return numberOfUnits == order.numberOfUnits && Objects.equals(id, order.id) && Objects.equals(userld, order.userld) && Objects.equals(basket, order.basket) && Objects.equals(orderDate, order.orderDate) && Objects.equals(orderCost, order.orderCost);
+        return numberOfUnits == order.numberOfUnits && Objects.equals(id, order.id) && Objects.equals(userId, order.userId) && Objects.equals(basketId, order.basketId) && Objects.equals(orderDate, order.orderDate) && Objects.equals(orderCost, order.orderCost);
     }
 
     public Long getId() {
@@ -58,20 +58,20 @@ public class Order {
         this.id = id;
     }
 
-    public Long getUserld() {
-        return userld;
+    public Long getUserId() {
+        return userId;
     }
 
-    public void setUserld(Long userld) {
-        this.userld = userld;
+    public void setUserId(Long userId) {
+        this.userId = userId;
     }
 
-    public Basket getBasket() {
-        return basket;
+    public Long getBasketId() {
+        return basketId;
     }
 
-    public void setBasket(Basket basket) {
-        this.basket = basket;
+    public void setBasketId(Long basketId) {
+        this.basketId = basketId;
     }
 
     public LocalDateTime getOrderDate() {

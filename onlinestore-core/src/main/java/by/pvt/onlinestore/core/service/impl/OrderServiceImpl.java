@@ -1,16 +1,16 @@
 package by.pvt.onlinestore.core.service.impl;
 
+import by.pvt.onlinestore.core.mapper.OrderMapper;
 import by.pvt.onlinestore.core.repository.OrderRepository;
 import by.pvt.onlinestore.core.service.OrderService;
-import org.modelmapper.ModelMapper;
 
 public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
-    private final ModelMapper modelMapper;
+    private final OrderMapper orderMapper;
 
-    public OrderServiceImpl(OrderRepository orderRepository, ModelMapper modelMapper) {
+    public OrderServiceImpl(OrderRepository orderRepository, OrderMapper orderMapper) {
         this.orderRepository = orderRepository;
-        this.modelMapper = modelMapper;
+        this.orderMapper = orderMapper;
     }
 
 }
