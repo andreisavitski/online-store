@@ -10,9 +10,11 @@ public interface ProductService {
 
     ProductResponseDTO addProduct(ProductRequestDTO productRequestDTO);
 
-    void changeOfProductInformation(ProductRequestDTO productRequestDTO);
+    void updateProduct(ProductRequestDTO productRequestDTO);
 
-    ProductResponseDTO viewProductInformation(Long id);
+    ProductResponseDTO getProductById(Long id);
+
     boolean checkIfExist(String sku);
 
+    List<ProductResponseDTO> getAllProductsById(List<Long> listId);
 }

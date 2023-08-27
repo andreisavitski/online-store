@@ -8,5 +8,7 @@
 <c:out value= "${errorMessage}"/>
 <br>
 <button onclick='history.back()'>Come back</button>
+<br>
+Go to a login page <a href = "login">To login</a>
 </div>
 </html>

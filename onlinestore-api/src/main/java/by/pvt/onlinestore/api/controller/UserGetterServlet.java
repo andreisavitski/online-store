@@ -9,8 +9,6 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
-import java.io.PrintWriter;
-import java.util.List;
 
 public class UserGetterServlet extends HttpServlet {
     private final UserService userService;
@@ -22,7 +20,7 @@ public class UserGetterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        UserResponseDTO user = userService.viewUserInformation(req.getParameter("login"));
+        UserResponseDTO user = userService.getUserByLogin(req.getParameter("login"));
         req.setAttribute("user", user);
         getServletContext().getRequestDispatcher("/admin/getuser").forward(req, resp);
     }

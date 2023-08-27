@@ -17,10 +17,15 @@ public interface ProductRepository {
 
     Product getProductById(Long id);
 
+    boolean existProductById(Long id);
+
     Product getProductByName(String name);
 
     Product getProductBySku(String productSku);
+
     Product getProductByIdForChange(Long id);
 
-    boolean findBySku(String sku);
+    boolean existBySku(String sku);
+
+    List<Product> getAllProductsById(List<Long> listId);
 }

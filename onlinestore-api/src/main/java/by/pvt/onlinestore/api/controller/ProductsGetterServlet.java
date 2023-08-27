@@ -19,6 +19,14 @@ public class ProductsGetterServlet extends HttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        resp.setContentType("text/html");
+        List<ProductResponseDTO> products = productService.getAllProducts();
+        req.setAttribute("products", products);
+        getServletContext().getRequestDispatcher("/buy").forward(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
         List<ProductResponseDTO> products = productService.getAllProducts();

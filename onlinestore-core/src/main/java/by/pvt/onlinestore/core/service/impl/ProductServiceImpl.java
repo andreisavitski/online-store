@@ -8,6 +8,7 @@ import by.pvt.onlinestore.core.repository.ProductRepository;
 import by.pvt.onlinestore.core.service.ProductService;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
@@ -36,7 +37,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public void changeOfProductInformation(ProductRequestDTO productRequestDTO) {
+    public void updateProduct(ProductRequestDTO productRequestDTO) {
         Product product = productMapper.productRequestDTOtoProduct(productRequestDTO);
         Product newProduct = productRepository.getProductByIdForChange(product.getProductId());
         newProduct.setName(product.getName());
@@ -46,17 +47,21 @@ public class ProductServiceImpl implements ProductService {
         newProduct.setQuantityInStock(product.getQuantityInStock());
         newProduct.setDescription(product.getDescription());
         productRepository.addOldProduct(newProduct);
-//        productRepository.deleteProductWithoutSaving(product.getProductId());
-//        productRepository.addOldProduct(newProduct);
     }
 
     @Override
-    public ProductResponseDTO viewProductInformation(Long id) {
+    public ProductResponseDTO getProductById(Long id) {
         return productMapper.productToProductResponseDTO(productRepository.getProductById(id));
     }
 
     @Override
     public boolean checkIfExist(String sku) {
-        return productRepository.findBySku(sku);
+        return productRepository.existBySku(sku);
+    }
+
+    @Override
+    public List<ProductResponseDTO> getAllProductsById(List<Long> listId) {
+        List<Product> products = productRepository.getAllProductsById(listId);
+        return products.stream().map(productMapper::productToProductResponseDTO).collect(Collectors.toList());
     }
 }

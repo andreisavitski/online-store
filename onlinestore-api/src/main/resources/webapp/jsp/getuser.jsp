@@ -33,7 +33,7 @@
 <a href = "admin">Come back</a>
 <body>
     <ul>
-        <p><c:out value="Information about the user <${user.login}>: Full name: ${user.fullName} Role: ${user.role}" /></p>
+        <p><c:out value="Information about the user <${user.login}>: Id:${user.id} Full name: ${user.fullName} Role: ${user.role}" /></p>
     </ul>
 </body>
 </html>

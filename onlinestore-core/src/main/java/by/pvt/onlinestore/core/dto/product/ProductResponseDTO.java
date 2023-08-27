@@ -2,7 +2,6 @@ package by.pvt.onlinestore.core.dto.product;
 
 import by.pvt.onlinestore.core.domain.ProductType;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ProductResponseDTO {

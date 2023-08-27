@@ -2,12 +2,11 @@ package by.pvt.onlinestore.core.dto.product;
 
 import by.pvt.onlinestore.core.domain.ProductType;
 
-import java.math.BigDecimal;
 import java.util.Objects;
 
 public class ProductRequestDTO {
     private Long productId;
-    private String  productSku;
+    private String productSku;
     private String name;
     private ProductType productType;
     private Long price;

@@ -21,11 +21,6 @@ public class RegistrationServlet extends HttpServlet {
     }
 
     @Override
-    protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doGet(req, resp);
-    }
-
-    @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         UserRequestDTO userRequestDTO = new UserRequestDTO();
         userRequestDTO.setLogin(req.getParameter("login"));

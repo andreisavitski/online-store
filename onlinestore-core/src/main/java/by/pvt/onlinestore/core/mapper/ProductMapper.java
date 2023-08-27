@@ -6,5 +6,6 @@ import by.pvt.onlinestore.core.dto.product.ProductResponseDTO;
 
 public interface ProductMapper {
     Product productRequestDTOtoProduct(ProductRequestDTO productRequestDTO);
+
     ProductResponseDTO productToProductResponseDTO(Product product);
 }

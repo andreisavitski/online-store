@@ -32,8 +32,7 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Fill in all the fields.");
         }
         userRequestDTO.setRole(Role.CLIENT);
-        User user = userMapper.userRequestDTOtoUser(userRequestDTO);
-        userRepository.addUser(userMapper.userRequestDTOtoUser(userRequestDTO));
+        User user = userRepository.addUser(userMapper.userRequestDTOtoUser(userRequestDTO));
         return userMapper.userToUserResponseDTO(user);
     }
 
@@ -44,7 +43,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserResponseDTO viewUserInformation(String login) {
+    public UserResponseDTO getUserByLogin(String login) {
         return userMapper.userToUserResponseDTO(userRepository.getByLogin(login));
     }
 
@@ -59,8 +58,9 @@ public class UserServiceImpl implements UserService {
         }
         return userMapper.userToUserResponseDTO(user);
     }
+
     @Override
     public boolean checkIfExist(String login) {
-        return userRepository.findByLogin(login);
+        return userRepository.existByLogin(login);
     }
 }

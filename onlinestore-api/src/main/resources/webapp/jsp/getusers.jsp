@@ -30,12 +30,12 @@
     </style>
 </head>
 <br>
-<a href = "admin">Come back</a>
+<button onclick='history.back()'>Come back</button>
 <body>
-    <ul>
-            <c:forEach var="user" items="${users}">
-                <p><c:out value="LOGIN: ${user.login} FULL NAME: ${user.fullName} ROLE: ${user.role}" /></p>
-            </c:forEach>
-    </ul>
+<ul>
+    <c:forEach var="user" items="${users}">
+        <p><c:out value="ID: ${user.id} LOGIN: ${user.login} FULL NAME: ${user.fullName} ROLE: ${user.role}" /></p>
+    </c:forEach>
+</ul>
 </body>
 </html>
