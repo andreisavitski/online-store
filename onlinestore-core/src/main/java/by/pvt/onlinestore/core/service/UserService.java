@@ -9,7 +9,8 @@ public interface UserService {
     UserResponseDTO register(UserRequestDTO userRequestDTO);
 
     List<UserResponseDTO> getAllUsers();
-    UserResponseDTO viewUserInformation(String login);
+
+    UserResponseDTO getUserByLogin(String login);
 
     UserResponseDTO authenticate(String login, String password);
 

@@ -6,17 +6,14 @@ import by.pvt.onlinestore.core.repository.ProductRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class ProductRepositoryImpl extends FileWorker implements ProductRepository {
-    private final List<Product> products = new ArrayList<>();
-    private final AtomicLong idCounter = new AtomicLong(1);
-    public static final String PATH = "D:\\ITACADEMY\\Projects\\OnlineStore\\onlinestore-core\\src\\main\\resources\\dbfile\\products";
-
+    public static final String PATH = "D:\\ITACADEMY\\Projects\\OnlineStore\\onlinestore-core\\src\\main\\resources\\dbfile\\products.txt";
 
     @Override
     public void addProduct(Product product) {
-        product.setProductId((idCounter.getAndIncrement()));
+        List<Product> productList = getProduct();
+        product.setProductId((long) (productList.size() + 1));
         List<Product> products = getProduct();
         products.add(product);
         serializeObject(products, PATH);
@@ -61,6 +58,11 @@ public class ProductRepositoryImpl extends FileWorker implements ProductReposito
     }
 
     @Override
+    public boolean existProductById(Long id) {
+        return getProduct().stream().anyMatch(a -> Objects.equals(a.getProductId(), id));
+    }
+
+    @Override
     public Product getProductByIdForChange(Long id) {
         Product product;
         try {
@@ -91,8 +93,17 @@ public class ProductRepositoryImpl extends FileWorker implements ProductReposito
 
 
     @Override
-    public boolean findBySku(String sku) {
+    public boolean existBySku(String sku) {
         return getProduct().stream().anyMatch(product -> sku.equals(product.getProductSku()));
+    }
+
+    @Override
+    public List<Product> getAllProductsById(List<Long> listId) {
+        List<Product> products = new ArrayList<>();
+        for (Long id : listId) {
+            products.add(getProductById(id));
+        }
+        return products;
     }
 
     private List<Product> getProduct() {

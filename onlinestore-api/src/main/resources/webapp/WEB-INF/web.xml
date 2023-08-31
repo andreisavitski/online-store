@@ -73,6 +73,56 @@
         <url-pattern>/getproduct</url-pattern>
     </servlet-mapping>
     <servlet>
+        <servlet-name>BasketAdderServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.BasketAdderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BasketAdderServlet</servlet-name>
+        <url-pattern>/basketadd</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderAdderServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.OrderAdderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderAdderServlet</servlet-name>
+        <url-pattern>/addorder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderCompletionServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.OrderCompletionServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderCompletionServlet</servlet-name>
+        <url-pattern>/completion</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>CreationOrderServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.CreationOrderServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>CreationOrderServlet</servlet-name>
+        <url-pattern>/create</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrdersGetterServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.OrdersGetterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrdersGetterServlet</servlet-name>
+        <url-pattern>/getorders</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>OrderGetterServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.OrderGetterServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>OrderGetterServlet</servlet-name>
+        <url-pattern>/getorder</url-pattern>
+    </servlet-mapping>
+
+
+    <servlet>
         <servlet-name>login</servlet-name>
         <jsp-file>/jsp/login.jsp</jsp-file>
     </servlet>
@@ -100,13 +150,6 @@
         <servlet-name>error</servlet-name>
         <jsp-file>/jsp/error.jsp</jsp-file>
     </servlet>
-    <servlet-mapping>
-        <servlet-name>basket</servlet-name>
-        <url-pattern>/basket</url-pattern>
-    </servlet-mapping><servlet>
-    <servlet-name>basket</servlet-name>
-    <jsp-file>/jsp/basket.jsp</jsp-file>
-</servlet>
     <servlet-mapping>
         <servlet-name>error</servlet-name>
         <url-pattern>/error</url-pattern>
@@ -151,6 +194,46 @@
         <servlet-name>alert</servlet-name>
         <url-pattern>/alert</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>buy</servlet-name>
+        <jsp-file>/jsp/buy.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>buy</servlet-name>
+        <url-pattern>/buy</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>order</servlet-name>
+        <jsp-file>/jsp/order.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>order</servlet-name>
+        <url-pattern>/order</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>closeorder</servlet-name>
+        <jsp-file>/jsp/closeorder.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>closeorder</servlet-name>
+        <url-pattern>/closeorder</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>getorders</servlet-name>
+        <jsp-file>/jsp/getorders.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getorders</servlet-name>
+        <url-pattern>/getorderspage</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>getorder</servlet-name>
+        <jsp-file>/jsp/getorder.jsp</jsp-file>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getorder</servlet-name>
+        <url-pattern>/getorderpage</url-pattern>
+    </servlet-mapping>
 
     <filter>
         <filter-name>AuthenticationFilter</filter-name>
@@ -164,13 +247,73 @@
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/client/*</url-pattern>
     </filter-mapping>
-<!--    <filter-mapping>-->
-<!--        <filter-name>AuthenticationFilter</filter-name>-->
-<!--        <url-pattern>/register/*</url-pattern>-->
-<!--    </filter-mapping>-->
-<!--    <filter-mapping>-->
-<!--        <filter-name>AuthenticationFilter</filter-name>-->
-<!--        <url-pattern>/authorize/*</url-pattern>-->
-<!--    </filter-mapping>-->
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getuser/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getusers/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/basketadd/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/addproduct/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/changeproduct/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getproductpage/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/addorder/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/completion/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/create/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getorders/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getorder/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getproductpage/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/buy/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/order/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/closeorder/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getorderspage/*</url-pattern>
+    </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/getorderpage/*</url-pattern>
+    </filter-mapping>
 
 </web-app>

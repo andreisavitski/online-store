@@ -30,11 +30,12 @@
     </style>
 </head>
 <br>
-
 <button onclick='history.back()'>Come back</button>
 <body>
+<ul>
     <c:forEach var="product" items="${products}">
-                    <p><c:out value="ID: ${product.productId} SKU: ${product.productSku} NAME: ${product.name} TYPE: ${product.productType} PRICE: ${product.price}byn DESCRIPTION: ${product.description} QUANTITY: ${product.quantityInStock}" /></p>
+        <p><c:out value="ID: ${product.productId} SKU: ${product.productSku} NAME: ${product.name} TYPE: ${product.productType} PRICE: ${product.price}byn DESCRIPTION: ${product.description} QUANTITY: ${product.quantityInStock}" /></p>
     </c:forEach>
+</ul>
 </body>
 </html>

@@ -32,6 +32,18 @@
                 font-size:      40px;
                 font-weight:    bold;
             }
+            .button1 {
+              background-color: white;
+              color: blue;
+              border: 2px solid #4CAF50;
+              font-family: 'Times New Roman', Times, serif;
+              font-size:      20px;
+              font-weight:    bold;
+            }
+            .button1:hover {
+              background-color: #4CAF50;
+              color: white;
+            }
     </style>
 </head>
 <body>
@@ -44,7 +56,26 @@
       accept-charset="utf-8">
     <div>
         <hr>
-        <button type="submit">Show all products</button>
+        <button class="button1" type="submit">Show all products</button>
     </div>
+</form>
+<form method="post"
+      action="/addorder"
+      accept-charset="utf-8">
+    <div>
+        <hr>
+        <button class="button1" type="submit">Go shopping</button>
+    </div>
+</form>
+<form method="get"
+      action="/getorder"
+      accept-charset="utf-8">
+      <hr>
+      <div>
+      <input type="hidden" name="id" value="${user.id}">
+      <button class="button1" type="submit">View all your orders</button>
+      <hr>
+    </div>
+</form>
 </body>
 </html>

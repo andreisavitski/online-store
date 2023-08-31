@@ -1,6 +1,5 @@
 package by.pvt.onlinestore.core.filter;
 
-import by.pvt.onlinestore.core.dto.user.UserResponseDTO;
 import jakarta.servlet.*;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpSession;

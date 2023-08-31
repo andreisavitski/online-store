@@ -125,5 +125,33 @@
      <hr>
      </div>
      </form>
+<form method="get"
+      action="/getproducts"
+      accept-charset="utf-8">
+      <div>
+      <label><b>Viewing all products </b></label>
+      <button type="submit">Show all products</button>
+      <hr>
+    </div>
+</form>
+<form method="get"
+      action="/getorders"
+      accept-charset="utf-8">
+      <div>
+      <label><b>Viewing all orders </b></label>
+      <button type="submit">Show all orders</button>
+      <hr>
+    </div>
+</form>
+<form method="get"
+      action="/getorder"
+      accept-charset="utf-8">
+      <div>
+      <label><b>View orders by user ID </b></label>
+       <input type="text" placeholder="Enter ID" name="id">
+      <button type="submit">Show orders</button>
+      <hr>
+    </div>
+</form>
 </body>
 </html>

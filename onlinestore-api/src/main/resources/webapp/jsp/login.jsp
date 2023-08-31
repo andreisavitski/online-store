@@ -48,16 +48,16 @@
     <hr>
 
     <label><b>Login</b></label>
-    <input type="text" placeholder="Enter login" name="login">
+    <input type="text"  placeholder="Enter login" name="login" required>
 
     <label><b>Password</b></label>
-    <input type="text" placeholder="Enter Password" name="password">
+    <input type="text" placeholder="Enter Password" name="password" required>
 
     <label><b>Name</b></label>
-    <input type="text" placeholder="Enter name" name="name">
+    <input type="text" placeholder="Enter name" name="name" required>
 
     <label><b>Surname</b></label>
-    <input type="text" placeholder="Enter surname" name="surname">
+    <input type="text" placeholder="Enter surname" name="surname" required>
     <hr>
     <p>By creating an account you agree to our <a href="#">Terms & Privacy</a>.</p>
     <button class="image-button"></button>
@@ -73,10 +73,10 @@
      <p>Sign in if you have an account.</p>
      <hr>
      <label><b>Login</b></label>
-     <input type="text" placeholder="Enter login" name="login">
+     <input type="text" placeholder="Enter login" name="login" required>
 
      <label><b>Password</b></label>
-     <input type="text" placeholder="Enter Password" name="password">
+     <input type="text" placeholder="Enter Password" name="password" required>
      <hr>
      <button class="image-button1"></button>
      </div>

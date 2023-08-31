@@ -28,7 +28,7 @@ public class ProductChangerServlet extends HttpServlet {
         productRequestDTO.setDescription(req.getParameter("description"));
         productRequestDTO.setPrice(req.getParameter("price"));
         productRequestDTO.setQuantityInStock(Integer.parseInt(req.getParameter("quantity")));
-        productService.changeOfProductInformation(productRequestDTO);
+        productService.updateProduct(productRequestDTO);
         resp.setContentType("text/html");
         req.setAttribute("alert", "Product data changed!");
         getServletContext().getRequestDispatcher("/alert").forward(req, resp);

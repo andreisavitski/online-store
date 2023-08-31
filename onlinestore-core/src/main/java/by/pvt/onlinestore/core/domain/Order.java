@@ -1,45 +1,22 @@
 package by.pvt.onlinestore.core.domain;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class Order {
+public class Order implements Serializable {
     private Long id;
     private Long userId;
-    private Long basketId;
-    private LocalDateTime orderDate;
-    private BigDecimal orderCost;
-    private int numberOfUnits;
+    private Long totalCost;
+    private Status status;
 
     public Order() {
     }
 
-    public Order(Long id, Long userId, Long basketId, LocalDateTime orderDate, int numberOfUnits) {
+    public Order(Long id, Long userId, Long totalCost, Status status) {
         this.id = id;
         this.userId = userId;
-        this.basketId = basketId;
-        this.orderDate = orderDate;
-//        this.orderCost = basket.getPrice().multiply(new BigDecimal(numberOfUnits).setScale(0, RoundingMode.CEILING));
-        this.numberOfUnits = numberOfUnits;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuffer sb = new StringBuffer("Order{");
-        sb.append("id=").append(id);
-        sb.append(", userId=").append(userId);
-        sb.append(", basketId=").append(basketId);
-        sb.append(", orderDate=").append(orderDate);
-        sb.append(", orderCost=").append(orderCost);
-        sb.append(", numberOfUnits=").append(numberOfUnits);
-        sb.append('}');
-        return sb.toString();
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, userId, basketId, orderDate, orderCost, numberOfUnits);
+        this.totalCost = totalCost;
+        this.status = status;
     }
 
     @Override
@@ -47,7 +24,23 @@ public class Order {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         Order order = (Order) o;
-        return numberOfUnits == order.numberOfUnits && Objects.equals(id, order.id) && Objects.equals(userId, order.userId) && Objects.equals(basketId, order.basketId) && Objects.equals(orderDate, order.orderDate) && Objects.equals(orderCost, order.orderCost);
+        return Objects.equals(id, order.id) && Objects.equals(userId, order.userId) && Objects.equals(totalCost, order.totalCost) && status == order.status;
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, userId, totalCost, status);
+    }
+
+    @Override
+    public String toString() {
+        final StringBuffer sb = new StringBuffer("Order{");
+        sb.append("id=").append(id);
+        sb.append(", userId=").append(userId);
+        sb.append(", totalCost=").append(totalCost);
+        sb.append(", status=").append(status);
+        sb.append('}');
+        return sb.toString();
     }
 
     public Long getId() {
@@ -66,35 +59,19 @@ public class Order {
         this.userId = userId;
     }
 
-    public Long getBasketId() {
-        return basketId;
+    public Long getTotalCost() {
+        return totalCost;
     }
 
-    public void setBasketId(Long basketId) {
-        this.basketId = basketId;
+    public void setTotalCost(Long totalCost) {
+        this.totalCost = totalCost;
     }
 
-    public LocalDateTime getOrderDate() {
-        return orderDate;
+    public Status getStatus() {
+        return status;
     }
 
-    public void setOrderDate(LocalDateTime orderDate) {
-        this.orderDate = orderDate;
-    }
-
-    public BigDecimal getOrderCost() {
-        return orderCost;
-    }
-
-    public void setOrderCost(BigDecimal orderCost) {
-        this.orderCost = orderCost;
-    }
-
-    public int getNumberOfUnits() {
-        return numberOfUnits;
-    }
-
-    public void setNumberOfUnits(int numberOfUnits) {
-        this.numberOfUnits = numberOfUnits;
+    public void setStatus(Status status) {
+        this.status = status;
     }
 }

@@ -1,8 +1,8 @@
 package by.pvt.onlinestore.core.mapper.impl;
 
+import by.pvt.onlinestore.core.domain.User;
 import by.pvt.onlinestore.core.dto.user.UserRequestDTO;
 import by.pvt.onlinestore.core.dto.user.UserResponseDTO;
-import by.pvt.onlinestore.core.domain.User;
 import by.pvt.onlinestore.core.mapper.UserMapper;
 
 public class UserMapperImpl implements UserMapper {
@@ -21,6 +21,7 @@ public class UserMapperImpl implements UserMapper {
     @Override
     public UserResponseDTO userToUserResponseDTO(User user) {
         UserResponseDTO userResponseDTO = new UserResponseDTO();
+        userResponseDTO.setId(user.getId());
         userResponseDTO.setName(user.getFirstName());
         userResponseDTO.setSurname(user.getLastName());
         userResponseDTO.setLogin(user.getLogin());

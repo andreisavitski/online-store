@@ -7,22 +7,21 @@ import by.pvt.onlinestore.core.repository.UserRepository;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
-import java.util.concurrent.atomic.AtomicLong;
 
 public class UserRepositoryImpl extends FileWorker implements UserRepository {
-    private final List<User> users = new ArrayList<>();
-    private final AtomicLong idCounter = new AtomicLong(1);
-    public static final String PATH = "D:\\ITACADEMY\\Projects\\OnlineStore\\onlinestore-core\\src\\main\\resources\\dbfile\\clients";
+    public static final String PATH = "D:\\ITACADEMY\\Projects\\OnlineStore\\onlinestore-core\\src\\main\\resources\\dbfile\\clients.txt";
 
     public UserRepositoryImpl() {
     }
 
     @Override
-    public void addUser(User user) {
-        user.setId((idCounter.getAndIncrement()));
+    public User addUser(User user) {
+        List<User> userList = getUsers();
+        user.setId((long) (userList.size() + 1));
         List<User> users = getUsers();
         users.add(user);
         serializeObject(users, PATH);
+        return user;
     }
 
     @Override
@@ -55,8 +54,8 @@ public class UserRepositoryImpl extends FileWorker implements UserRepository {
     }
 
     @Override
-    public boolean findByLogin(String login) {
-        return getUsers().stream().anyMatch(user -> login.equals(user.getLogin()))  ;
+    public boolean existByLogin(String login) {
+        return getUsers().stream().anyMatch(user -> login.equals(user.getLogin()));
     }
 
     private List<User> getUsers() {
