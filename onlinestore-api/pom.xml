@@ -9,20 +9,22 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>onlinestore-api</artifactId>
+    <artifactId>onlinestore-api</artifactId><build><plugins><plugin><groupId>org.apache.maven.plugins</groupId><artifactId>maven-compiler-plugin</artifactId><configuration><source>14</source><target>14</target></configuration></plugin></plugins></build>
 
-<!--    <dependencies>-->
-<!--        <dependency>-->
-<!--            <groupId>by.pvt.onlinestore</groupId>-->
-<!--            <artifactId>onlinestore-core</artifactId>-->
-<!--            <version>1.0-SNAPSHOT</version>-->
-<!--        </dependency>-->
-<!--    </dependencies>-->
+    <dependencies>
+        <dependency>
+            <groupId>by.pvt.onlinestore</groupId>
+            <artifactId>onlinestore-core</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
 
     <properties>
         <maven.compiler.source>19</maven.compiler.source>
         <maven.compiler.target>19</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <packaging>war</packaging>
 
 </project>
