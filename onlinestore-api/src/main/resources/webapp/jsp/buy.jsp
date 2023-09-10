@@ -61,9 +61,20 @@
     <label><b>Quantity</b></label>
     <input type="text" placeholder="Enter quantity" name="quantity" required>
     <button>Add to Basket</button>
+    </div>
+    </form>
+
+<form method="post"
+    action="removebasket"
+    accept-charset="utf-8">
+    <div>
+    <input type="hidden" name="product" value="<c:out value="${product.productId}"/>">
+    <input type="hidden" name="order" value="<c:out value="${order.id}"/>">
+    <button>Remove from Basket</button>
     <hr>
     </div>
     </form>
+
     </c:forEach>
 <form method="post"
       action="completion"

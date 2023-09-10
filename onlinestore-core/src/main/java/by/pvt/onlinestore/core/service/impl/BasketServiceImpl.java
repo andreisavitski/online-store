@@ -31,22 +31,27 @@ public class BasketServiceImpl implements BasketService {
                 newBasket.setQuantityOfGoods(newBasket.getQuantityOfGoods() + basketRequestDTO.getQuantityOfGoods());
                 basketRepository.updateBasket(newBasket);
             } else {
-                newBasket = basketRepository.addBasket(basketMapper.basketRequestDTOtoBasket(basketRequestDTO));
+                newBasket = basketRepository.addBasket(basketMapper.mapBasketRequestDTOtoBasket(basketRequestDTO));
             }
         } else {
-            newBasket = basketRepository.addBasket(basketMapper.basketRequestDTOtoBasket(basketRequestDTO));
+            newBasket = basketRepository.addBasket(basketMapper.mapBasketRequestDTOtoBasket(basketRequestDTO));
         }
-        return basketMapper.basketToBasketResponseDTO(newBasket);
+        return basketMapper.mapBasketToBasketResponseDTO(newBasket);
     }
 
     @Override
     public List<BasketResponseDTO> getAllBasketsByOrderId(Long id) {
         List<Basket> baskets = basketRepository.getAllBasketsByOrderId(id);
-        return baskets.stream().map(basketMapper::basketToBasketResponseDTO).toList();
+        return baskets.stream().map(basketMapper::mapBasketToBasketResponseDTO).toList();
     }
 
     @Override
-    public boolean existBasketsByOrderId(Long id) {
+    public void deleteBasket(BasketRequestDTO basketRequestDTO) {
+        Basket basket = basketMapper.mapBasketRequestDTOtoBasket(basketRequestDTO);
+        basketRepository.deleteBasketByOrderIdAndProductId(basket);
+    }
+
+    private boolean existBasketsByOrderId(Long id) {
         return !basketRepository.getAllBasketsByOrderId(id).isEmpty();
     }
 }

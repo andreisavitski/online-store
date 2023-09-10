@@ -1,4 +1,4 @@
-package by.pvt.onlinestore.core.repository.impl;
+package by.pvt.onlinestore.core.repository.impl.file;
 
 import by.pvt.onlinestore.core.domain.Order;
 import by.pvt.onlinestore.core.repository.OrderRepository;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class OrderRepositoryImpl extends FileWorker implements OrderRepository {
+public class OrderFileRepository extends FileWorker implements OrderRepository {
     private final List<Order> orders = new ArrayList<>();
     public static final String PATH = "D:\\ITACADEMY\\Projects\\OnlineStore\\onlinestore-core\\src\\main\\resources\\dbfile\\orders.txt";
 
@@ -66,8 +66,7 @@ public class OrderRepositoryImpl extends FileWorker implements OrderRepository {
     @Override
     public List<Order> getOrderByUserId(Long id) {
         List<Order> orders = getOrders();
-        List<Order> ordersAfterFilter = orders.stream().filter(order -> order.getUserId().equals(id)).toList();
-        return ordersAfterFilter;
+        return orders.stream().filter(order -> order.getUserId().equals(id)).toList();
     }
 
     private List<Order> getOrders() {

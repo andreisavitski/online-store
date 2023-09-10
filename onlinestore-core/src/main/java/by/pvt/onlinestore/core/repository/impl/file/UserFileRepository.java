@@ -1,4 +1,4 @@
-package by.pvt.onlinestore.core.repository.impl;
+package by.pvt.onlinestore.core.repository.impl.file;
 
 
 import by.pvt.onlinestore.core.domain.User;
@@ -8,10 +8,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class UserRepositoryImpl extends FileWorker implements UserRepository {
+public class UserFileRepository extends FileWorker implements UserRepository {
     public static final String PATH = "D:\\ITACADEMY\\Projects\\OnlineStore\\onlinestore-core\\src\\main\\resources\\dbfile\\clients.txt";
 
-    public UserRepositoryImpl() {
+    public UserFileRepository() {
     }
 
     @Override
@@ -48,9 +48,13 @@ public class UserRepositoryImpl extends FileWorker implements UserRepository {
     }
 
     @Override
-    public User getByLogin(String login) {
+    public User getUserByLogin(String login) {
         List<User> users = getUsers();
-        return users.stream().filter(u -> u.getLogin().equals(login)).findFirst().orElse(null);
+        User user = users.stream().filter(u -> u.getLogin().equals(login)).findFirst().orElse(null);
+        if (user == null) {
+            throw new RuntimeException("User with this login does not exist");
+        }
+        return user;
     }
 
     @Override

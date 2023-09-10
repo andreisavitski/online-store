@@ -4,8 +4,11 @@ import by.pvt.onlinestore.core.domain.User;
 import by.pvt.onlinestore.core.dto.user.UserRequestDTO;
 import by.pvt.onlinestore.core.dto.user.UserResponseDTO;
 
-public interface UserMapper {
-    User userRequestDTOtoUser(UserRequestDTO userRequestDTO);
+import java.sql.ResultSet;
 
-    UserResponseDTO userToUserResponseDTO(User user);
+public interface UserMapper {
+    User mapUserRequestDTOtoUser(UserRequestDTO userRequestDTO);
+
+    UserResponseDTO mapUserToUserResponseDTO(User user);
+    User mapResultSetToUser(ResultSet resultSet);
 }

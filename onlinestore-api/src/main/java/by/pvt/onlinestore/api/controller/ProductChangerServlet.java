@@ -20,15 +20,20 @@ public class ProductChangerServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        ProductRequestDTO productRequestDTO = new ProductRequestDTO();
-        productRequestDTO.setProductId(Long.valueOf(req.getParameter("id")));
-        productRequestDTO.setName(req.getParameter("name"));
-        productRequestDTO.setProductSku(req.getParameter("sku"));
-        productRequestDTO.setProductType(ProductType.valueOf(req.getParameter("type")));
-        productRequestDTO.setDescription(req.getParameter("description"));
-        productRequestDTO.setPrice(req.getParameter("price"));
-        productRequestDTO.setQuantityInStock(Integer.parseInt(req.getParameter("quantity")));
-        productService.updateProduct(productRequestDTO);
+        try {
+            ProductRequestDTO productRequestDTO = new ProductRequestDTO();
+            productRequestDTO.setProductId(Long.valueOf(req.getParameter("id")));
+            productRequestDTO.setName(req.getParameter("name"));
+            productRequestDTO.setProductSku(req.getParameter("sku"));
+            productRequestDTO.setProductType(ProductType.valueOf(req.getParameter("type")));
+            productRequestDTO.setDescription(req.getParameter("description"));
+            productRequestDTO.setPrice(req.getParameter("price"));
+            productRequestDTO.setQuantityInStock(Integer.parseInt(req.getParameter("quantity")));
+            productService.updateProduct(productRequestDTO);
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         resp.setContentType("text/html");
         req.setAttribute("alert", "Product data changed!");
         getServletContext().getRequestDispatcher("/alert").forward(req, resp);

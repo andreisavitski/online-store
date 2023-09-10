@@ -9,6 +9,5 @@ public interface BasketService {
     BasketResponseDTO addBasket(BasketRequestDTO basketRequestDTO);
 
     List<BasketResponseDTO> getAllBasketsByOrderId(Long id);
-
-    boolean existBasketsByOrderId(Long id);
+    void deleteBasket(BasketRequestDTO basketRequestDTO);
 }

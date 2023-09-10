@@ -25,6 +25,16 @@ public class Product implements Serializable {
         this.quantityInStock = quantityInStock;
     }
 
+    public Product(Long productId, String productSku, String name, ProductType productType, Long price, String description, int quantityInStock) {
+        this.productId = productId;
+        this.productSku = productSku;
+        this.name = name;
+        this.productType = productType;
+        this.price = price;
+        this.description = description;
+        this.quantityInStock = quantityInStock;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;

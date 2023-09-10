@@ -21,7 +21,13 @@ public class ProductsGetterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        List<ProductResponseDTO> products = productService.getAllProducts();
+        List<ProductResponseDTO> products = null;
+        try {
+            products = productService.getAllProducts();
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         req.setAttribute("products", products);
         getServletContext().getRequestDispatcher("/buy").forward(req, resp);
     }
@@ -29,7 +35,13 @@ public class ProductsGetterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        List<ProductResponseDTO> products = productService.getAllProducts();
+        List<ProductResponseDTO> products = null;
+        try {
+            products = productService.getAllProducts();
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         req.setAttribute("products", products);
         getServletContext().getRequestDispatcher("/getproductspage").forward(req, resp);
     }

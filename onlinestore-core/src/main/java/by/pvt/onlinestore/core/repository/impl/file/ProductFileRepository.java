@@ -1,4 +1,4 @@
-package by.pvt.onlinestore.core.repository.impl;
+package by.pvt.onlinestore.core.repository.impl.file;
 
 import by.pvt.onlinestore.core.domain.Product;
 import by.pvt.onlinestore.core.repository.ProductRepository;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-public class ProductRepositoryImpl extends FileWorker implements ProductRepository {
+public class ProductFileRepository extends FileWorker implements ProductRepository {
     public static final String PATH = "D:\\ITACADEMY\\Projects\\OnlineStore\\onlinestore-core\\src\\main\\resources\\dbfile\\products.txt";
 
     @Override
@@ -20,9 +20,12 @@ public class ProductRepositoryImpl extends FileWorker implements ProductReposito
     }
 
     @Override
-    public void addOldProduct(Product product) {
+    public void updateProduct(Product product) {
         List<Product> products = getProduct();
-        products.add(product);
+        if (products.get((int) (product.getProductId() - 1)) == null) {
+            throw new RuntimeException("There is no product with this ID");
+        }
+        products.set((int) (product.getProductId() - 1), product);
         serializeObject(products, PATH);
     }
 
@@ -30,8 +33,7 @@ public class ProductRepositoryImpl extends FileWorker implements ProductReposito
     public void deleteProductById(Long id) {
         List<Product> products = getProduct();
         if (products.isEmpty()) return;
-        Product product = getProductById(id);
-        products.remove(product);
+        products.remove((int) (id - 1));
         serializeObject(products, PATH);
     }
 
@@ -50,11 +52,11 @@ public class ProductRepositoryImpl extends FileWorker implements ProductReposito
 
     @Override
     public Product getProductById(Long id) {
-        try {
-            return getProduct().stream().filter(a -> Objects.equals(a.getProductId(), id)).toList().get(0);
-        } catch (Exception e) {
-            throw new RuntimeException("Product with given Id does not exist.");
+        Product product = getProduct().stream().filter(a -> Objects.equals(a.getProductId(), id)).toList().get(0);
+        if (product == null) {
+            throw new RuntimeException("There is no product with this ID");
         }
+        return product;
     }
 
     @Override

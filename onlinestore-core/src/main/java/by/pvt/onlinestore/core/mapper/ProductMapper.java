@@ -4,8 +4,12 @@ import by.pvt.onlinestore.core.domain.Product;
 import by.pvt.onlinestore.core.dto.product.ProductRequestDTO;
 import by.pvt.onlinestore.core.dto.product.ProductResponseDTO;
 
-public interface ProductMapper {
-    Product productRequestDTOtoProduct(ProductRequestDTO productRequestDTO);
+import java.sql.ResultSet;
 
-    ProductResponseDTO productToProductResponseDTO(Product product);
+public interface ProductMapper {
+    Product mapProductRequestDTOtoProduct(ProductRequestDTO productRequestDTO);
+
+    ProductResponseDTO mapProductToProductResponseDTO(Product product);
+
+    Product mapResultSerToProduct(ResultSet resultSet);
 }

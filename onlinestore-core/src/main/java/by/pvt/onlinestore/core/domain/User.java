@@ -5,8 +5,8 @@ import java.util.Objects;
 
 public class User implements Serializable {
     private Long id;
-    private String firstName;
-    private String lastName;
+    private String name;
+    private String surname;
     private String login;
     private String password;
     private Role role;
@@ -14,19 +14,29 @@ public class User implements Serializable {
     public User() {
     }
 
-    public User(String firstName, String lastName, String login, String password) {
-        this.firstName = firstName;
-        this.lastName = lastName;
+    public User(Long id, String name, String surname, String login, String password, Role role) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
         this.login = login;
         this.password = password;
+        this.role = role;
+    }
+
+    public User(Long id, String name, String surname, String login, Role role) {
+        this.id = id;
+        this.name = name;
+        this.surname = surname;
+        this.login = login;
+        this.role = role;
     }
 
     @Override
     public String toString() {
         final StringBuffer sb = new StringBuffer("User{");
         sb.append("id=").append(id);
-        sb.append(", firstName='").append(firstName).append('\'');
-        sb.append(", lastName='").append(lastName).append('\'');
+        sb.append(", name='").append(name).append('\'');
+        sb.append(", surname ='").append(surname).append('\'');
         sb.append(", login='").append(login).append('\'');
         sb.append(", password='").append(password).append('\'');
         sb.append(", role=").append(role);
@@ -39,12 +49,12 @@ public class User implements Serializable {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(firstName, user.firstName) && Objects.equals(lastName, user.lastName) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && role == user.role;
+        return Objects.equals(id, user.id) && Objects.equals(name, user.name) && Objects.equals(surname, user.surname) && Objects.equals(login, user.login) && Objects.equals(password, user.password) && role == user.role;
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, firstName, lastName, login, password, role);
+        return Objects.hash(id, name, surname, login, password, role);
     }
 
     public Long getId() {
@@ -55,20 +65,20 @@ public class User implements Serializable {
         this.id = id;
     }
 
-    public String getFirstName() {
-        return firstName;
+    public String getName() {
+        return name;
     }
 
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
+    public void setName(String name) {
+        this.name = name;
     }
 
-    public String getLastName() {
-        return lastName;
+    public String getSurname() {
+        return surname;
     }
 
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
+    public void setSurname(String surname) {
+        this.surname = surname;
     }
 
     public String getLogin() {

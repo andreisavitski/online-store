@@ -27,10 +27,17 @@ public class RegistrationServlet extends HttpServlet {
         userRequestDTO.setPassword(req.getParameter("password"));
         userRequestDTO.setName(req.getParameter("name"));
         userRequestDTO.setSurname(req.getParameter("surname"));
-        UserResponseDTO user = userService.register(userRequestDTO);
+        UserResponseDTO user = null;
+        try {
+            user = userService.register(userRequestDTO);
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         HttpSession session = req.getSession(true);
         session.setAttribute("userAuthorize", user);
         req.setAttribute("user", user);
+        assert user != null;
         if (user.getRole().equals(Role.ADMIN)) {
             req.getRequestDispatcher("/jsp/admin.jsp").forward(req, resp);
         } else {

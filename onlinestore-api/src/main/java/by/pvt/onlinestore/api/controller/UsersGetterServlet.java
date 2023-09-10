@@ -21,7 +21,13 @@ public class UsersGetterServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        List<UserResponseDTO> users = userService.getAllUsers();
+        List<UserResponseDTO> users = null;
+        try {
+            users = userService.getAllUsers();
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         req.setAttribute("users", users);
         getServletContext().getRequestDispatcher("/admin/getusers").forward(req, resp);
     }

@@ -13,7 +13,7 @@ public interface UserRepository {
 
     User getUserById(Long id);
 
-    User getByLogin(String login);
+    User getUserByLogin(String login);
 
     boolean existByLogin(String login);
 }

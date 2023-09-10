@@ -120,6 +120,22 @@
         <servlet-name>OrderGetterServlet</servlet-name>
         <url-pattern>/getorder</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>ProductRemoverServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.ProductRemoverServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>ProductRemoverServlet</servlet-name>
+        <url-pattern>/removeproduct</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>BasketRemoverServlet</servlet-name>
+        <servlet-class>by.pvt.onlinestore.api.controller.BasketRemoverServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>BasketRemoverServlet</servlet-name>
+        <url-pattern>/removebasket</url-pattern>
+    </servlet-mapping>
 
 
     <servlet>
@@ -315,5 +331,25 @@
         <filter-name>AuthenticationFilter</filter-name>
         <url-pattern>/getorderpage/*</url-pattern>
     </filter-mapping>
+    <filter-mapping>
+        <filter-name>AuthenticationFilter</filter-name>
+        <url-pattern>/removebasket/*</url-pattern>
+    </filter-mapping>
+
+    <context-param>
+        <param-name>quartz:shutdown-on-unload</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <context-param>
+        <param-name>quartz:wait-on-shutdown</param-name>
+        <param-value>false</param-value>
+    </context-param>
+    <context-param>
+        <param-name>quartz:start-scheduler-on-load</param-name>
+        <param-value>true</param-value>
+    </context-param>
+    <listener>
+        <listener-class>com.sample.scheduling.SampleListener</listener-class>
+    </listener>
 
 </web-app>

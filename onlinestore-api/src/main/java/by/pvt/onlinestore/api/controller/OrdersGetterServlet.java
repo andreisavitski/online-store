@@ -20,7 +20,13 @@ public class OrdersGetterServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<OrderResponseDTO> orders = orderService.getAllOrders();
+        List<OrderResponseDTO> orders = null;
+        try {
+            orders = orderService.getAllOrders();
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         resp.setContentType("text/html");
         req.setAttribute("orders", orders);
         getServletContext().getRequestDispatcher("/getorderspage").forward(req, resp);
