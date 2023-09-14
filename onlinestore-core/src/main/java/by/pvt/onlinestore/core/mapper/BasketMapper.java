@@ -4,9 +4,13 @@ import by.pvt.onlinestore.core.domain.Basket;
 import by.pvt.onlinestore.core.dto.basket.BasketRequestDTO;
 import by.pvt.onlinestore.core.dto.basket.BasketResponseDTO;
 
+import java.sql.ResultSet;
+
 public interface BasketMapper {
 
-    Basket basketRequestDTOtoBasket(BasketRequestDTO basketRequestDTO);
+    Basket mapBasketRequestDTOtoBasket(BasketRequestDTO basketRequestDTO);
 
-    BasketResponseDTO basketToBasketResponseDTO(Basket basket);
+    BasketResponseDTO mapBasketToBasketResponseDTO(Basket basket);
+
+    Basket mapResultSetToBasket(ResultSet resultSet);
 }

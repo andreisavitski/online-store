@@ -14,7 +14,7 @@ public interface ProductService {
 
     ProductResponseDTO getProductById(Long id);
 
-    boolean checkIfExist(String sku);
-
     List<ProductResponseDTO> getAllProductsById(List<Long> listId);
+
+    void deleteProductById(Long id);
 }

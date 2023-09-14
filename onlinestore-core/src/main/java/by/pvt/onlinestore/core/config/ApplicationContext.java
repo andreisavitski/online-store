@@ -12,10 +12,10 @@ import by.pvt.onlinestore.core.repository.BasketRepository;
 import by.pvt.onlinestore.core.repository.OrderRepository;
 import by.pvt.onlinestore.core.repository.ProductRepository;
 import by.pvt.onlinestore.core.repository.UserRepository;
-import by.pvt.onlinestore.core.repository.impl.BasketRepositoryImpl;
-import by.pvt.onlinestore.core.repository.impl.OrderRepositoryImpl;
-import by.pvt.onlinestore.core.repository.impl.ProductRepositoryImpl;
-import by.pvt.onlinestore.core.repository.impl.UserRepositoryImpl;
+import by.pvt.onlinestore.core.repository.impl.db.BasketDbRepository;
+import by.pvt.onlinestore.core.repository.impl.db.OrderDbRepository;
+import by.pvt.onlinestore.core.repository.impl.db.ProductDbRepository;
+import by.pvt.onlinestore.core.repository.impl.db.UserDbRepository;
 import by.pvt.onlinestore.core.service.BasketService;
 import by.pvt.onlinestore.core.service.OrderService;
 import by.pvt.onlinestore.core.service.ProductService;
@@ -28,6 +28,7 @@ import by.pvt.onlinestore.core.service.impl.UserServiceImpl;
 
 public class ApplicationContext {
     private static ApplicationContext applicationContext;
+    private final PostgresConnection postgresConnection;
     private final UserMapper userMapper;
     private final UserRepository userRepository;
     private final UserService userService;
@@ -42,17 +43,18 @@ public class ApplicationContext {
     private final BasketService basketService;
 
     public ApplicationContext() {
+        postgresConnection = new PostgresConnection();
         userMapper = new UserMapperImpl();
-        userRepository = new UserRepositoryImpl();
+        userRepository = new UserDbRepository(postgresConnection, userMapper);
         userService = new UserServiceImpl(userRepository, userMapper);
         productMapper = new ProductMapperImpl();
-        productRepository = new ProductRepositoryImpl();
+        productRepository = new ProductDbRepository(postgresConnection, productMapper);
         productService = new ProductServiceImpl(productRepository, productMapper);
         basketMapper = new BasketMapperImpl();
-        basketRepository = new BasketRepositoryImpl();
+        basketRepository = new BasketDbRepository(postgresConnection, basketMapper);
         basketService = new BasketServiceImpl(basketRepository, basketMapper, userRepository);
         orderMapper = new OrderMapperImpl();
-        orderRepository = new OrderRepositoryImpl();
+        orderRepository = new OrderDbRepository(postgresConnection, orderMapper);
         orderService = new OrderServiceImpl(orderRepository, orderMapper, basketRepository, productRepository, basketMapper, productMapper);
     }
 

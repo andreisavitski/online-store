@@ -25,10 +25,17 @@ public class AuthorizationServlet extends HttpServlet {
         UserRequestDTO userRequestDTO = new UserRequestDTO();
         userRequestDTO.setLogin(req.getParameter("login"));
         userRequestDTO.setPassword(req.getParameter("password"));
-        UserResponseDTO user = userService.authenticate(userRequestDTO.getLogin(), userRequestDTO.getPassword());
+        UserResponseDTO user = null;
+        try {
+            user = userService.authenticate(userRequestDTO.getLogin(), userRequestDTO.getPassword());
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         HttpSession session = req.getSession(true);
         session.setAttribute("userAuthorize", user);
         req.setAttribute("user", user);
+        assert user != null;
         if (user.getRole().equals(Role.ADMIN)) {
             req.getRequestDispatcher("/jsp/admin.jsp").forward(req, resp);
         } else {

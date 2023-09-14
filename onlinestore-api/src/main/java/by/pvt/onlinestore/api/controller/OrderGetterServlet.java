@@ -2,6 +2,7 @@ package by.pvt.onlinestore.api.controller;
 
 import by.pvt.onlinestore.core.config.ApplicationContext;
 import by.pvt.onlinestore.core.dto.order.OrderResponseDTO;
+import by.pvt.onlinestore.core.dto.user.UserResponseDTO;
 import by.pvt.onlinestore.core.service.OrderService;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -19,8 +20,29 @@ public class OrderGetterServlet extends HttpServlet {
     }
 
     @Override
+    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        UserResponseDTO user = (UserResponseDTO) req.getSession().getAttribute("userAuthorize");
+        List<OrderResponseDTO> orders = null;
+        try {
+            orders = orderService.getOrderByUserId(user.getId());
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
+        resp.setContentType("text/html");
+        req.setAttribute("orders", orders);
+        getServletContext().getRequestDispatcher("/getorderspage").forward(req, resp);
+    }
+
+    @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        List<OrderResponseDTO> orders = orderService.getOrderByUserId(Long.valueOf(req.getParameter("id")));
+        List<OrderResponseDTO> orders = null;
+        try {
+            orders = orderService.getOrderByUserId(Long.valueOf(req.getParameter("id")));
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         resp.setContentType("text/html");
         req.setAttribute("orders", orders);
         getServletContext().getRequestDispatcher("/getorderspage").forward(req, resp);

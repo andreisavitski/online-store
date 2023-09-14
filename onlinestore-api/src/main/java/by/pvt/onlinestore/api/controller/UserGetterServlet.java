@@ -20,7 +20,13 @@ public class UserGetterServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         resp.setContentType("text/html");
-        UserResponseDTO user = userService.getUserByLogin(req.getParameter("login"));
+        UserResponseDTO user = null;
+        try {
+            user = userService.getUserByLogin(req.getParameter("login"));
+        } catch (RuntimeException e) {
+            req.setAttribute("errorMessage", e.getMessage());
+            req.getRequestDispatcher("jsp/error.jsp").forward(req, resp);
+        }
         req.setAttribute("user", user);
         getServletContext().getRequestDispatcher("/admin/getuser").forward(req, resp);
     }

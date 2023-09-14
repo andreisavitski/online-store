@@ -57,7 +57,7 @@
      accept-charset="utf-8">
      <div>
      <hr>
-     <label><b>View information on all products </b></label>
+     <label><b>Viewing all products </b></label>
      <button type="submit">Look</button>
      <hr>
      </div>
@@ -116,6 +116,16 @@
      </div>
      </form>
 <form method="post"
+     action="removeproduct"
+     accept-charset="utf-8">
+     <div>
+     <label><b>Removing a product</b></label>
+     <input type="text" placeholder="Enter ID" name="id">
+     <button type="submit">Remove</button>
+     <hr>
+     </div>
+     </form>
+<form method="post"
      action="getproduct"
      accept-charset="utf-8">
      <div>
@@ -125,15 +135,6 @@
      <hr>
      </div>
      </form>
-<form method="get"
-      action="/getproducts"
-      accept-charset="utf-8">
-      <div>
-      <label><b>Viewing all products </b></label>
-      <button type="submit">Show all products</button>
-      <hr>
-    </div>
-</form>
 <form method="get"
       action="/getorders"
       accept-charset="utf-8">

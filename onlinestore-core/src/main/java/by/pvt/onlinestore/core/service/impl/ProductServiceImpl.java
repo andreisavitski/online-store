@@ -23,45 +23,46 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<ProductResponseDTO> getAllProducts() {
         List<Product> products = productRepository.getAllProducts();
-        return products.stream().map(productMapper::productToProductResponseDTO).toList();
+        if (products.isEmpty()) {
+            throw new RuntimeException("No products");
+        }
+        return products.stream().map(productMapper::mapProductToProductResponseDTO).toList();
     }
 
     @Override
     public ProductResponseDTO addProduct(ProductRequestDTO productRequestDTO) {
         if (checkIfExist(productRequestDTO.getProductSku())) {
-            throw new RuntimeException("The sku " + productRequestDTO.getProductSku() + " entered already exists. Enter another sku.");
+            throw new RuntimeException("A product with this SKU already exists");
         }
-        Product product = productMapper.productRequestDTOtoProduct(productRequestDTO);
-        productRepository.addProduct(productMapper.productRequestDTOtoProduct(productRequestDTO));
-        return productMapper.productToProductResponseDTO(product);
+        Product product = productMapper.mapProductRequestDTOtoProduct(productRequestDTO);
+        productRepository.addProduct(productMapper.mapProductRequestDTOtoProduct(productRequestDTO));
+        return productMapper.mapProductToProductResponseDTO(product);
     }
 
     @Override
     public void updateProduct(ProductRequestDTO productRequestDTO) {
-        Product product = productMapper.productRequestDTOtoProduct(productRequestDTO);
-        Product newProduct = productRepository.getProductByIdForChange(product.getProductId());
-        newProduct.setName(product.getName());
-        newProduct.setProductSku(product.getProductSku());
-        newProduct.setProductType(product.getProductType());
-        newProduct.setPrice(product.getPrice());
-        newProduct.setQuantityInStock(product.getQuantityInStock());
-        newProduct.setDescription(product.getDescription());
-        productRepository.addOldProduct(newProduct);
+        Product product = productMapper.mapProductRequestDTOtoProduct(productRequestDTO);
+        productRepository.updateProduct(product);
     }
 
     @Override
     public ProductResponseDTO getProductById(Long id) {
-        return productMapper.productToProductResponseDTO(productRepository.getProductById(id));
+        return productMapper.mapProductToProductResponseDTO(productRepository.getProductById(id));
     }
 
-    @Override
-    public boolean checkIfExist(String sku) {
+    private boolean checkIfExist(String sku) {
         return productRepository.existBySku(sku);
     }
 
     @Override
     public List<ProductResponseDTO> getAllProductsById(List<Long> listId) {
+        productRepository.getAllProducts().stream().filter(product -> product.getProductId().equals(listId.iterator().next()));
         List<Product> products = productRepository.getAllProductsById(listId);
-        return products.stream().map(productMapper::productToProductResponseDTO).collect(Collectors.toList());
+        return products.stream().map(productMapper::mapProductToProductResponseDTO).collect(Collectors.toList());
+    }
+
+    @Override
+    public void deleteProductById(Long id) {
+        productRepository.deleteProductById(id);
     }
 }

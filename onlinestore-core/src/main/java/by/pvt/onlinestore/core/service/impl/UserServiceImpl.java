@@ -32,35 +32,37 @@ public class UserServiceImpl implements UserService {
             throw new RuntimeException("Fill in all the fields.");
         }
         userRequestDTO.setRole(Role.CLIENT);
-        User user = userRepository.addUser(userMapper.userRequestDTOtoUser(userRequestDTO));
-        return userMapper.userToUserResponseDTO(user);
+        User user = userRepository.addUser(userMapper.mapUserRequestDTOtoUser(userRequestDTO));
+        return userMapper.mapUserToUserResponseDTO(user);
     }
 
     @Override
     public List<UserResponseDTO> getAllUsers() {
         List<User> users = userRepository.getAllUser();
-        return users.stream().map(userMapper::userToUserResponseDTO).toList();
+        if (users.isEmpty()) {
+            throw new RuntimeException("No users");
+        }
+        return users.stream().map(userMapper::mapUserToUserResponseDTO).toList();
     }
 
     @Override
     public UserResponseDTO getUserByLogin(String login) {
-        return userMapper.userToUserResponseDTO(userRepository.getByLogin(login));
+        return userMapper.mapUserToUserResponseDTO(userRepository.getUserByLogin(login));
     }
 
     @Override
     public UserResponseDTO authenticate(String login, String password) {
-        User user = userRepository.getByLogin(login);
-        if (user == null) {
-            throw new RuntimeException("User with login " + login + " not found");
+        User user = userRepository.getUserByLogin(login);
+        if (user.getLogin() == null) {
+            throw new RuntimeException("The user does not exist or the password is entered incorrectly");
         }
         if (!user.getPassword().equals(password)) {
-            throw new RuntimeException("Password entered incorrectly");
+            throw new RuntimeException("The user does not exist or the password is entered incorrectly");
         }
-        return userMapper.userToUserResponseDTO(user);
+        return userMapper.mapUserToUserResponseDTO(user);
     }
 
-    @Override
-    public boolean checkIfExist(String login) {
+    private boolean checkIfExist(String login) {
         return userRepository.existByLogin(login);
     }
 }

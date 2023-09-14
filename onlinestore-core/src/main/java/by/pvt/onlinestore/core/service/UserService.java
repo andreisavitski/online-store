@@ -13,6 +13,4 @@ public interface UserService {
     UserResponseDTO getUserByLogin(String login);
 
     UserResponseDTO authenticate(String login, String password);
-
-    boolean checkIfExist(String login);
 }

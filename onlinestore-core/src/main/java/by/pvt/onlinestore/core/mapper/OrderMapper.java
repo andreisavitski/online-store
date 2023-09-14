@@ -4,9 +4,13 @@ import by.pvt.onlinestore.core.domain.Order;
 import by.pvt.onlinestore.core.dto.order.OrderRequestDTO;
 import by.pvt.onlinestore.core.dto.order.OrderResponseDTO;
 
+import java.sql.ResultSet;
+
 public interface OrderMapper {
 
-    Order orderRequestDTOtoOrder(OrderRequestDTO orderRequestDTO);
+    Order mapOrderRequestDTOtoOrder(OrderRequestDTO orderRequestDTO);
 
-    OrderResponseDTO orderToOrderResponseDTO(Order order);
+    OrderResponseDTO mapOrderToOrderResponseDTO(Order order);
+
+    Order mapResultSetToOrder(ResultSet resultSet);
 }

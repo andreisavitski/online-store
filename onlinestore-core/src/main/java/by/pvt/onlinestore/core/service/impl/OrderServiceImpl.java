@@ -40,25 +40,25 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public OrderResponseDTO addOrder(OrderRequestDTO orderRequestDTO) {
-        Order order = orderRepository.addOrder(orderMapper.orderRequestDTOtoOrder(orderRequestDTO));
-        return orderMapper.orderToOrderResponseDTO(order);
+        Order order = orderRepository.addOrder(orderMapper.mapOrderRequestDTOtoOrder(orderRequestDTO));
+        return orderMapper.mapOrderToOrderResponseDTO(order);
     }
 
     @Override
-    public OrderResponseDTO getOrderById(Long id) {
-        List<Basket> baskets = basketRepository.getAllBasketsByOrderId(id);
-        List<BasketResponseDTO> basketResponseDTOS = baskets.stream().map(basketMapper::basketToBasketResponseDTO).toList();
+    public OrderResponseDTO getOrderById(Long orderId) {
+        List<Basket> baskets = basketRepository.getAllBasketsByOrderId(orderId);
+        List<BasketResponseDTO> basketResponseDTOS = baskets.stream().map(basketMapper::mapBasketToBasketResponseDTO).toList();
         List<Long> listProductId = baskets.stream().map(Basket::getProductId).toList();
         List<Product> products = productRepository.getAllProductsById(listProductId);
-        List<ProductResponseDTO> productResponseDTOS = products.stream().map(productMapper::productToProductResponseDTO).toList();
+        List<ProductResponseDTO> productResponseDTOS = products.stream().map(productMapper::mapProductToProductResponseDTO).toList();
         List<Integer> listQuantityOfGoods = baskets.stream().map(Basket::getQuantityOfGoods).toList();
         List<Long> listQuantityOfGoodsLong = listQuantityOfGoods.stream().map(Long::valueOf).toList();
         List<Long> priceList = products.stream().map(Product::getPrice).toList();
         Long totalCost = LongStream.range(0, min(priceList.size(), listQuantityOfGoodsLong.size())).map(i -> priceList.get((int) i) * listQuantityOfGoodsLong.get((int) i)).sum();
-        Order order = orderRepository.getOrderById(id);
+        Order order = orderRepository.getOrderById(orderId);
         order.setTotalCost(totalCost);
         orderRepository.updateTotalCost(order);
-        OrderResponseDTO orderResponseDTO = orderMapper.orderToOrderResponseDTO(order);
+        OrderResponseDTO orderResponseDTO = orderMapper.mapOrderToOrderResponseDTO(order);
         orderResponseDTO.setBaskets(basketResponseDTOS);
         orderResponseDTO.setProducts(productResponseDTOS);
         orderResponseDTO.setTotalCost(totalCost);
@@ -70,7 +70,7 @@ public class OrderServiceImpl implements OrderService {
         Order order = orderRepository.getOrderById(id);
         order.setStatus(Status.WAITING_FOR_COURIER);
         orderRepository.updateStatus(order);
-        return orderMapper.orderToOrderResponseDTO(order);
+        return orderMapper.mapOrderToOrderResponseDTO(order);
     }
 
     @Override
@@ -82,14 +82,18 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public List<OrderResponseDTO> getAllOrders() {
         List<Order> orders = orderRepository.getAllOrders();
-        List<OrderResponseDTO> orderResponseDTOS = orders.stream().map(orderMapper::orderToOrderResponseDTO).toList();
-        return orderResponseDTOS;
+        if (orders.isEmpty()) {
+            throw new RuntimeException("No orders");
+        }
+        return orders.stream().map(orderMapper::mapOrderToOrderResponseDTO).toList();
     }
 
     @Override
     public List<OrderResponseDTO> getOrderByUserId(Long id) {
         List<Order> orders = orderRepository.getOrderByUserId(id);
-        List<OrderResponseDTO> orderResponseDTOS = orders.stream().map(orderMapper::orderToOrderResponseDTO).toList();
-        return orderResponseDTOS;
+        if (orders.isEmpty()) {
+            throw new RuntimeException("This user has no orders");
+        }
+        return orders.stream().map(orderMapper::mapOrderToOrderResponseDTO).toList();
     }
 }

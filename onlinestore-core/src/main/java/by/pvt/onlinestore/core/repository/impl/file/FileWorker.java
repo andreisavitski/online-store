@@ -1,4 +1,4 @@
-package by.pvt.onlinestore.core.repository.impl;
+package by.pvt.onlinestore.core.repository.impl.file;
 
 import java.io.*;
 import java.util.ArrayList;

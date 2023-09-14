@@ -48,7 +48,7 @@
 </head>
 <body>
 <b>Hello </b1>
-<c:out value = "${user.fullName}"/>
+<c:out value = "${userAuthorize.fullName}"/>
 <br>
 <a href = "login">LogOut</a>
 <form method="get"
@@ -67,7 +67,7 @@
         <button class="button1" type="submit">Go shopping</button>
     </div>
 </form>
-<form method="get"
+<form method="post"
       action="/getorder"
       accept-charset="utf-8">
       <hr>

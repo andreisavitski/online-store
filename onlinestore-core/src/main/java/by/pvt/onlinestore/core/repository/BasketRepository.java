@@ -18,4 +18,6 @@ public interface BasketRepository {
     Basket updateBasket(Basket basket);
 
     void deleteBasketByOrderId(Long id);
+
+    void deleteBasketByOrderIdAndProductId(Basket basket);
 }
